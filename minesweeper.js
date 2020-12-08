@@ -69,7 +69,7 @@ function createBoard (cellNum) {
     board.cells[i] = {
       row: rowCounter,
       col: colCounter,
-      isMine: Boolean(Math.random() < 0.3),
+      isMine: Boolean(Math.random() < 0.2),
       isMarked: false,
       hidden: true
     }
@@ -98,6 +98,8 @@ function startGame () {
 //
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
+
+
 function checkForWin () {
   let mines = 0;
   let safeCell = 0;
@@ -112,7 +114,10 @@ function checkForWin () {
   }
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
-  if (safeCell + mines === board.cells.length) lib.displayMessage('You win!')  
+  if (safeCell + mines === board.cells.length) {
+    document.getElementById("tada").play();
+    lib.displayMessage('You win!');
+  }  
 }
 
 // Define this function to count the number of mines around the cell
