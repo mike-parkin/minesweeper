@@ -69,7 +69,7 @@ function createBoard (cellNum) {
     board.cells[i] = {
       row: rowCounter,
       col: colCounter,
-      isMine: Boolean(Math.random() < 0.4),
+      isMine: Boolean(Math.random() < 0.3),
       isMarked: false,
       hidden: true
     }
