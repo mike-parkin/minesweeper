@@ -3,72 +3,93 @@ document.addEventListener('click', checkForWin);
 document.addEventListener('contextmenu', checkForWin);
 
 // Define your `board` object here!
-var board = {
-  cells: [
-    {
-      row: 0,
-      col: 0,
-      isMine: false,
-      hidden: true
-    },
-    {
-      row: 0,
-      col: 1,
-      isMine: true,
-      hidden: true
-    },
-    {
-      row: 0,
-      col: 2,
-      isMine: false,
-      hidden: true
-    },
-    {
-      row: 1,
-      col: 0,
-      isMine: false,
-      hidden: true
-    },
-    {
-      row: 1,
-      col: 1,
-      isMine: false,
-      hidden: true
-    },
-    {
-      row: 1,
-      col: 2,
-      isMine: true,
-      hidden: true
-    },
-    {
-      row: 2,
-      col: 0,
-      isMine: false,
-      hidden: true
-    },
-    {
-      row: 2,
-      col: 1,
-      isMine: true,
-      hidden: true
-    },
-    {
-      row: 2,
-      col: 2,
-      isMine: false,
+// var board = {
+//   cells: [
+//     {
+//       row: 0,
+//       col: 0,
+//       isMine: false,
+//       hidden: true
+//     },
+//     {
+//       row: 0,
+//       col: 1,
+//       isMine: true,
+//       hidden: true
+//     },
+//     {
+//       row: 0,
+//       col: 2,
+//       isMine: false,
+//       hidden: true
+//     },
+//     {
+//       row: 1,
+//       col: 0,
+//       isMine: false,
+//       hidden: true
+//     },
+//     {
+//       row: 1,
+//       col: 1,
+//       isMine: false,
+//       hidden: true
+//     },
+//     {
+//       row: 1,
+//       col: 2,
+//       isMine: true,
+//       hidden: true
+//     },
+//     {
+//       row: 2,
+//       col: 0,
+//       isMine: false,
+//       hidden: true
+//     },
+//     {
+//       row: 2,
+//       col: 1,
+//       isMine: true,
+//       hidden: true
+//     },
+//     {
+//       row: 2,
+//       col: 2,
+//       isMine: false,
+//       hidden: true
+//     }
+//   ]
+// }
+function createBoard (cellNum) {
+  let board = {cells: []};
+  rowCounter = 0
+  colCounter = 0
+  for (let i = 0; i < cellNum; i++) {
+    board.cells[i] = {
+      row: rowCounter,
+      col: colCounter,
+      isMine: Boolean(Math.random() < 0.4),
+      isMarked: false,
       hidden: true
     }
-  ]
+    colCounter++
+    if (colCounter > (Math.sqrt(cellNum) - 1)) {
+      colCounter = 0; 
+      rowCounter++;  
+    }
+  }
+  return board;
 }
-// console.log(board.cells.length)
 
 function startGame () {
+
+  board = createBoard(36);
+  console.log(board);
 
   for (var i = 0; i < board.cells.length; i++) {
     board.cells[i].surroundingMines = countSurroundingMines(board.cells[i]);
   }
-  // console.log(board);
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
 }
@@ -113,10 +134,9 @@ function countSurroundingMines (cell) {
     }
   }
   
-  // console.log(count);
   return count;
 }
 
-// console.log(board);
+
 
 
